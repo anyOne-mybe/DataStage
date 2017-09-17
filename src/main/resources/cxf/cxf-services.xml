@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxrs-client="http://cxf.apache.org/jaxrs" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxrsClient="http://cxf.apache.org/jaxrs-client" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://cxf.apache.org/jaxrs
+       http://cxf.apache.org/schemas/jaxrs.xsd
+       http://cxf.apache.org/jaxrs-client
+       http://cxf.apache.org/schemas/jaxrs-client.xsd
+        http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+
+
+
+	<jaxrsClient:client id="elasticSearchClient"
+		serviceClass="com.guan.datastage.api.customer.client.ICustomerElasticSearchClient"
+		address="http://127.0.0.1:8080/dimension/services/action">
+		<jaxrsClient:inInterceptors>
+			<ref bean="cxfInLogger" />
+		</jaxrsClient:inInterceptors>
+		<jaxrsClient:outInterceptors>
+			<ref bean="cxfOutLogger" />
+		</jaxrsClient:outInterceptors>
+		<jaxrsClient:providers>
+			<ref bean="jsonProvider" />
+		</jaxrsClient:providers>
+	</jaxrsClient:client>
+
+	<jaxrs:server address="/api">
+		<jaxrs:serviceBeans>
+			<ref bean="customerFacadeImpl" />
+		</jaxrs:serviceBeans>
+		<jaxrs:inInterceptors>
+			<ref bean="cxfInLogger" />
+		</jaxrs:inInterceptors>
+		<jaxrs:outInterceptors>
+			<ref bean="cxfOutLogger" />
+		</jaxrs:outInterceptors>
+		<jaxrs:providers>
+			<!-- <ref bean="cxfExceptionHandler" /> -->
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+
+
+
+	<bean id="cxfOutLogger" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+
+	<bean id="cxfInLogger" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+
+	<bean id="restSecurityInterceptor"
+		class="com.guan.datastage.commom.security.RestSecurityInterceptor" />
+
+
+
+</beans>
