@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxrs-client="http://cxf.apache.org/jaxrs" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxrsClient="http://cxf.apache.org/jaxrs-client" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://cxf.apache.org/jaxrs
+       http://cxf.apache.org/schemas/jaxrs.xsd
+       http://cxf.apache.org/jaxrs-client
+       http://cxf.apache.org/schemas/jaxrs-client.xsd
+        http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxrsClient:client id="elasticSearchClient"
+		serviceClass="com.guan.datastage.api.customer.client.ICustomerElasticSearchClient"
+		address="http://172.16.81.137:9201">
+		<jaxrsClient:inInterceptors>
+			<ref bean="cxfInLogger" />
+		</jaxrsClient:inInterceptors>
+		<jaxrsClient:outInterceptors>
+			<ref bean="cxfOutLogger" />
+		</jaxrsClient:outInterceptors>
+		<jaxrsClient:providers>
+			<ref bean="jsonProvider" />
+		</jaxrsClient:providers>
+	</jaxrsClient:client>
+
+</beans>

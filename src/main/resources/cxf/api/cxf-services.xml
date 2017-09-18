@@ -12,22 +12,6 @@
         http://cxf.apache.org/jaxws
        http://cxf.apache.org/schemas/jaxws.xsd">
 
-
-
-	<jaxrsClient:client id="elasticSearchClient"
-		serviceClass="com.guan.datastage.api.customer.client.ICustomerElasticSearchClient"
-		address="http://127.0.0.1:8080/dimension/services/action">
-		<jaxrsClient:inInterceptors>
-			<ref bean="cxfInLogger" />
-		</jaxrsClient:inInterceptors>
-		<jaxrsClient:outInterceptors>
-			<ref bean="cxfOutLogger" />
-		</jaxrsClient:outInterceptors>
-		<jaxrsClient:providers>
-			<ref bean="jsonProvider" />
-		</jaxrsClient:providers>
-	</jaxrsClient:client>
-
 	<jaxrs:server address="/api">
 		<jaxrs:serviceBeans>
 			<ref bean="customerFacadeImpl" />
@@ -46,12 +30,6 @@
 
 
 
-	<bean id="cxfOutLogger" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
-
-	<bean id="cxfInLogger" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
-
-	<bean id="restSecurityInterceptor"
-		class="com.guan.datastage.commom.security.RestSecurityInterceptor" />
 
 
 

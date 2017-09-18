@@ -15,14 +15,18 @@
 	<context:annotation-config />
 
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+	<bean id="cxfOutLogger" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+	<bean id="cxfInLogger" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+	<bean id="restSecurityInterceptor"
+		class="com.guan.datastage.commom.security.RestSecurityInterceptor" />
 
 	<import resource="classpath:mybatis/spring-mybatis.xml" />
-	
-	<import resource="classpath:cxf/cxf-services.xml" />
-	
-	<context:component-scan base-package="com.guan.datastage.api.*.facade.impl"/>
-	<context:component-scan base-package="com.guan.datastage.api.*.service.impl"/>
-	<context:component-scan base-package="com.guan.datastage.api.*.business.impl"/>
+
+	<import resource="classpath:cxf/*/**.xml" />
+
+	<context:component-scan base-package="com.guan.datastage.api.*.facade.impl" />
+	<context:component-scan base-package="com.guan.datastage.api.*.service.impl" />
+	<context:component-scan base-package="com.guan.datastage.api.*.business.impl" />
 
 
 </beans>
