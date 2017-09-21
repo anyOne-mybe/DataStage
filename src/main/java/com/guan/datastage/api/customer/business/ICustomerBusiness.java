@@ -12,4 +12,6 @@ public interface ICustomerBusiness
     CreateIndexResponse createCustomerFullNameIndex( Integer shards,
             Integer replicas );
 
+    void accurateSearchCustomerAliseName( String aliasName );
+
 }
