@@ -13,6 +13,14 @@
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<context:annotation-config />
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:cxf/adapter/es.properties</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 	<bean id="cxfOutLogger" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />

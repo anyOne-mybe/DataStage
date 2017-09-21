@@ -8,6 +8,7 @@ import com.guan.datastage.api.customer.business.ICustomerBusiness;
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.service.ICustomerService;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.CreateIndexResponse;
 
 @Named
 public class CustomerServiceImpl implements ICustomerService
@@ -20,6 +21,13 @@ public class CustomerServiceImpl implements ICustomerService
     public AddResponse addCustomer( Customer customer )
     {
         return customerBusiness.addCustomer( customer );
+    }
+
+    @Override
+    public CreateIndexResponse createCustomerFullNameIndex( Integer shards,
+            Integer replicas )
+    {
+        return customerBusiness.createCustomerFullNameIndex( shards, replicas );
     }
 
 }

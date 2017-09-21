@@ -14,7 +14,7 @@
 
 	<jaxrsClient:client id="elasticSearchClient"
 		serviceClass="com.guan.datastage.api.customer.client.ICustomerElasticSearchClient"
-		address="http://172.16.81.137:9201">
+		address="${es.cluster.ip}">
 		<jaxrsClient:inInterceptors>
 			<ref bean="cxfInLogger" />
 		</jaxrsClient:inInterceptors>

@@ -7,15 +7,16 @@ public class Customer implements Serializable
 {
 
     private static final long serialVersionUID = -3241022781932789601L;
-    private Long id;
+    private String id;
     private String name;
+    private String customerCode;
 
-    public Long getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId( Long id )
+    public void setId( String id )
     {
         this.id = id;
     }
@@ -28,6 +29,16 @@ public class Customer implements Serializable
     public void setName( String name )
     {
         this.name = name;
+    }
+
+    public String getCustomerCode()
+    {
+        return customerCode;
+    }
+
+    public void setCustomerCode( String customerCode )
+    {
+        this.customerCode = customerCode;
     }
 
 }
