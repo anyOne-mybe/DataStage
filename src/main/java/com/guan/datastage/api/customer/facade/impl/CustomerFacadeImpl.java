@@ -1,6 +1,9 @@
 
 package com.guan.datastage.api.customer.facade.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -45,6 +48,24 @@ public class CustomerFacadeImpl implements ICustomerFacade
         {
             CreateIndexResponse data = customerService
                     .createCustomerFullNameIndex( shards, replicas );
+            response.setData( data );
+        } catch ( Exception e )
+        {
+            ExceptionHandler.handleException( response, e );
+        }
+        return response;
+    }
+
+    @Override
+    public ServiceResponse<List<Map<String, Object>>> transformationDatas(
+            List<Map<String, Object>> datas, String fileName )
+    {
+        ServiceResponse<List<Map<String, Object>>> response = new ServiceResponse<>();
+
+        try
+        {
+            List<Map<String, Object>> data = customerService
+                    .transformationDatas( datas, fileName );
             response.setData( data );
         } catch ( Exception e )
         {

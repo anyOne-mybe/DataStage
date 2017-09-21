@@ -1,9 +1,13 @@
 
 package com.guan.datastage.api.customer.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.vo.AddResponse;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
+import com.guan.datastage.commom.exception.BaseBusinessException;
 
 public interface ICustomerService
 {
@@ -27,5 +31,9 @@ public interface ICustomerService
      * @return
      */
     AddResponse addCustomer( Customer customer );
+
+    List<Map<String, Object>> transformationDatas(
+            List<Map<String, Object>> datas, String fileName )
+            throws BaseBusinessException;
 
 }
