@@ -4,6 +4,7 @@ package com.guan.datastage.api.customer.facade;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -14,7 +15,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
+import com.guan.datastage.api.customer.vo.EsMappingProperties;
+import com.guan.datastage.api.customer.vo.MappingResult;
 import com.guan.datastage.domain.common.ServiceResponse;
 
 @Path( "/customer" )
@@ -26,6 +30,11 @@ public interface ICustomerFacade
     ServiceResponse<CreateIndexResponse> createCustomerFullNameIndex(
             @QueryParam( "shards" ) Integer shards,
             @QueryParam( "replicas" ) Integer replicas );
+
+    @POST
+    @Path( "/mapping" )
+    ServiceResponse<MappingResult> customerFullNameMapping(
+            EsMappingProperties esMappingProperties );
 
     @POST
     @Path( "/add" )
@@ -44,5 +53,17 @@ public interface ICustomerFacade
     ServiceResponse<List<Map<String, Object>>> transformationDatas(
             List<Map<String, Object>> datas,
             @PathParam( "fileName" ) String fileName );
+
+    /**
+     * 分词
+     * 
+     * @param analyze
+     * @param tokenizer
+     * @return
+     */
+    @GET
+    @Path( "/analyze/{tokenizer}" )
+    ServiceResponse<AnalyzerResult> analyze( @QueryParam( "text" ) String text,
+            @PathParam( "tokenizer" ) String tokenizer );
 
 }

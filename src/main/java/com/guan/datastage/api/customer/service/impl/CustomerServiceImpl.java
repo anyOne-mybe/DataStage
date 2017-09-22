@@ -11,7 +11,10 @@ import com.guan.datastage.api.customer.business.ICustomerBusiness;
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.service.ICustomerService;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
+import com.guan.datastage.api.customer.vo.EsMappingProperties;
+import com.guan.datastage.api.customer.vo.MappingResult;
 import com.guan.datastage.commom.exception.BaseBusinessException;
 
 @Named
@@ -52,6 +55,21 @@ public class CustomerServiceImpl implements ICustomerService
         // 精确查找客户全名表
         customerBusiness.accurateSearchCustomerAliseName( aliasName );
 
+    }
+
+    @Override
+    public MappingResult customerFullNameMapping(
+            EsMappingProperties esMappingProperties )
+            throws BaseBusinessException
+    {
+        return customerBusiness.customerFullNameMapping( esMappingProperties );
+    }
+
+    @Override
+    public AnalyzerResult analyze( String text, String tokenizer )
+            throws BaseBusinessException
+    {
+        return customerBusiness.analyze( text, tokenizer );
     }
 
 }

@@ -11,7 +11,10 @@ import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.facade.ICustomerFacade;
 import com.guan.datastage.api.customer.service.ICustomerService;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
+import com.guan.datastage.api.customer.vo.EsMappingProperties;
+import com.guan.datastage.api.customer.vo.MappingResult;
 import com.guan.datastage.commom.util.ExceptionHandler;
 import com.guan.datastage.domain.common.ServiceResponse;
 
@@ -66,6 +69,42 @@ public class CustomerFacadeImpl implements ICustomerFacade
         {
             List<Map<String, Object>> data = customerService
                     .transformationDatas( datas, fileName );
+            response.setData( data );
+        } catch ( Exception e )
+        {
+            ExceptionHandler.handleException( response, e );
+        }
+        return response;
+    }
+
+    @Override
+    public ServiceResponse<MappingResult> customerFullNameMapping(
+            EsMappingProperties esMappingProperties )
+    {
+        ServiceResponse<MappingResult> response = new ServiceResponse<>();
+
+        try
+        {
+            MappingResult data = customerService
+                    .customerFullNameMapping( esMappingProperties );
+            response.setData( data );
+        } catch ( Exception e )
+        {
+            ExceptionHandler.handleException( response, e );
+        }
+        return response;
+    }
+
+    @Override
+    public ServiceResponse<AnalyzerResult> analyze( String text,
+            String tokenizer )
+    {
+
+        ServiceResponse<AnalyzerResult> response = new ServiceResponse<>();
+
+        try
+        {
+            AnalyzerResult data = customerService.analyze( text, tokenizer );
             response.setData( data );
         } catch ( Exception e )
         {

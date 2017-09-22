@@ -7,7 +7,7 @@ public interface ElasticSearchProperties
     /**
      * 客户全名库index
      */
-    String CUSTOMER_FULL_NAME_INDEX = "customer_full_name_index";
+    String CUSTOMER_FULL_NAME_INDEX = "yitihua_customer_full_name_index";
 
     /**
      * 客户全名type

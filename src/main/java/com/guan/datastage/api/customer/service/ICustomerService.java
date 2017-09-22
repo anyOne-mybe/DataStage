@@ -6,7 +6,10 @@ import java.util.Map;
 
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
+import com.guan.datastage.api.customer.vo.EsMappingProperties;
+import com.guan.datastage.api.customer.vo.MappingResult;
 import com.guan.datastage.commom.exception.BaseBusinessException;
 
 public interface ICustomerService
@@ -34,6 +37,13 @@ public interface ICustomerService
 
     List<Map<String, Object>> transformationDatas(
             List<Map<String, Object>> datas, String fileName )
+            throws BaseBusinessException;
+
+    MappingResult customerFullNameMapping(
+            EsMappingProperties esMappingProperties )
+            throws BaseBusinessException;
+
+    AnalyzerResult analyze( String text, String tokenizer )
             throws BaseBusinessException;
 
 }

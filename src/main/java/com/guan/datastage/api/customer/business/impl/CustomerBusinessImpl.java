@@ -8,10 +8,13 @@ import com.guan.datastage.api.customer.business.ICustomerBusiness;
 import com.guan.datastage.api.customer.client.ICustomerElasticSearchClient;
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
 import com.guan.datastage.api.customer.vo.EsIndex;
+import com.guan.datastage.api.customer.vo.EsMappingProperties;
 import com.guan.datastage.api.customer.vo.EsParameter;
 import com.guan.datastage.api.customer.vo.EsSetting;
+import com.guan.datastage.api.customer.vo.MappingResult;
 
 @Named
 public class CustomerBusinessImpl implements ICustomerBusiness
@@ -56,6 +59,28 @@ public class CustomerBusinessImpl implements ICustomerBusiness
 
         return customerElasticSearchClient.createCustomerFullNameIndex();
 
+    }
+
+    @Override
+    public void accurateSearchCustomerAliseName( String aliasName )
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public MappingResult customerFullNameMapping(
+            EsMappingProperties esMappingProperties )
+    {
+        return customerElasticSearchClient
+                .customerFullNameMapping( esMappingProperties );
+
+    }
+
+    @Override
+    public AnalyzerResult analyze( String text, String tokenizer )
+    {
+        return customerElasticSearchClient.analyze( text, tokenizer );
     }
 
 }

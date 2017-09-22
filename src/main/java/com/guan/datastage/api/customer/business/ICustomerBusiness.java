@@ -3,7 +3,10 @@ package com.guan.datastage.api.customer.business;
 
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.vo.AddResponse;
+import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
+import com.guan.datastage.api.customer.vo.EsMappingProperties;
+import com.guan.datastage.api.customer.vo.MappingResult;
 
 public interface ICustomerBusiness
 {
@@ -13,5 +16,10 @@ public interface ICustomerBusiness
             Integer replicas );
 
     void accurateSearchCustomerAliseName( String aliasName );
+
+    MappingResult customerFullNameMapping(
+            EsMappingProperties esMappingProperties );
+
+    AnalyzerResult analyze( String text, String tokenizer );
 
 }
