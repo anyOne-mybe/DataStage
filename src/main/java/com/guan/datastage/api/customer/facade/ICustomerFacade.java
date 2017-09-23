@@ -41,6 +41,10 @@ public interface ICustomerFacade
     @Path( "/add" )
     ServiceResponse<AddResponse> addCustomer( Customer customer );
 
+    @POST
+    @Path( "/addTest" )
+    ServiceResponse<AddResponse> addCustomerTest( Customer customer );
+
     /**
      * 数据清洗接口
      * 

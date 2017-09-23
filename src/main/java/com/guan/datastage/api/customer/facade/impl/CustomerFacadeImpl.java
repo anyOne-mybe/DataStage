@@ -114,4 +114,26 @@ public class CustomerFacadeImpl implements ICustomerFacade
         return response;
     }
 
+    @Override
+    public ServiceResponse<AddResponse> addCustomerTest( Customer customer )
+    {
+        String[] name0 = {"湖南", "广东", "深圳", "广西", "青海", "四川", "南昌", "北海", "青岛"};
+        String[] name1 = {"桃源", "常德", "木塘垸", "三叉港", "衡阳", "邵阳", "坏话", "漆河",
+                "益阳"};
+        String[] name2 = {"一中", "九中", "二中", "三中", "四中", "五中", "六中", "七中", "八中"};
+        String aliaseName = null;
+        int a = 0;
+
+        for ( int i = 0; i < 1000000; i++ )
+        {
+            a = i / 100;
+            aliaseName = name0[i % 9] + a + name1[i % 9] + a + name2[i % 9] + a;
+            customer.setAliasName( aliaseName );
+            customer.setRealName( "测试数据：" + (i + 1) );
+            addCustomer( customer );
+        }
+
+        return null;
+    }
+
 }
