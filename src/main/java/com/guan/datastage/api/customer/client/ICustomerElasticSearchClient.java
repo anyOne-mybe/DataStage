@@ -17,6 +17,8 @@ import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
 import com.guan.datastage.api.customer.vo.EsMappingProperties;
 import com.guan.datastage.api.customer.vo.EsParameter;
+import com.guan.datastage.api.customer.vo.EsQueryParam;
+import com.guan.datastage.api.customer.vo.EsSearchResponse;
 import com.guan.datastage.api.customer.vo.MappingResult;
 
 @Path( "/" + ElasticSearchProperties.CUSTOMER_FULL_NAME_INDEX )
@@ -68,5 +70,9 @@ public interface ICustomerElasticSearchClient
     @Path( "/_analyze" )
     AnalyzerResult analyze( @QueryParam( "text" ) String text,
             @QueryParam( "tokenizer" ) String tokenizer );
+
+    @POST
+    @Path( "/" + ElasticSearchProperties.CUSTOMER_FULL_NAME_TYPE + "/_search" )
+    EsSearchResponse<Customer> matchePhraseQuery( EsQueryParam queryParam );
 
 }

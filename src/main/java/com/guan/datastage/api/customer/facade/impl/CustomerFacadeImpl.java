@@ -15,6 +15,7 @@ import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
 import com.guan.datastage.api.customer.vo.EsMappingProperties;
 import com.guan.datastage.api.customer.vo.MappingResult;
+import com.guan.datastage.api.customer.vo.TransformationVO;
 import com.guan.datastage.commom.util.ExceptionHandler;
 import com.guan.datastage.domain.common.ServiceResponse;
 
@@ -60,14 +61,14 @@ public class CustomerFacadeImpl implements ICustomerFacade
     }
 
     @Override
-    public ServiceResponse<List<Map<String, Object>>> transformationDatas(
+    public ServiceResponse<List<TransformationVO<Map<String, Object>>>> transformationDatas(
             List<Map<String, Object>> datas, String fileName )
     {
-        ServiceResponse<List<Map<String, Object>>> response = new ServiceResponse<>();
+        ServiceResponse<List<TransformationVO<Map<String, Object>>>> response = new ServiceResponse<>();
 
         try
         {
-            List<Map<String, Object>> data = customerService
+            List<TransformationVO<Map<String, Object>>> data = customerService
                     .transformationDatas( datas, fileName );
             response.setData( data );
         } catch ( Exception e )

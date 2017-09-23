@@ -1,6 +1,7 @@
 
 package com.guan.datastage.api.customer.business.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,6 @@ import javax.inject.Named;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.jce.provider.BrokenJCEBlockCipher.BrokePBEWithMD5AndDES;
 
 import com.guan.datastage.api.customer.business.ICustomerBusiness;
 import com.guan.datastage.api.customer.client.ICustomerElasticSearchClient;
@@ -23,8 +23,10 @@ import com.guan.datastage.api.customer.vo.EsMappingProperties;
 import com.guan.datastage.api.customer.vo.EsMatchPhrase;
 import com.guan.datastage.api.customer.vo.EsParameter;
 import com.guan.datastage.api.customer.vo.EsQueryParam;
+import com.guan.datastage.api.customer.vo.EsSearchResponse;
 import com.guan.datastage.api.customer.vo.EsSetting;
 import com.guan.datastage.api.customer.vo.EsToken;
+import com.guan.datastage.api.customer.vo.HitContent;
 import com.guan.datastage.api.customer.vo.MappingResult;
 
 @Named
@@ -73,7 +75,7 @@ public class CustomerBusinessImpl implements ICustomerBusiness
     }
 
     @Override
-    public void accurateSearchCustomerAliseName( String aliasName )
+    public List<Customer> accurateSearchCustomerAliseName( String aliasName )
     {
         String meatchString = getMatchString( aliasName, null );
         EsQueryParam queryParam = new EsQueryParam();
@@ -82,10 +84,25 @@ public class CustomerBusinessImpl implements ICustomerBusiness
         match_phrase.put( "aliasName", meatchString );
         query.setMatch_phrase( match_phrase );
         queryParam.setQuery( query );
-        
-        
-        
-        
+
+        EsSearchResponse<Customer> response = customerElasticSearchClient
+                .matchePhraseQuery( queryParam );
+
+        List<Customer> customers = null;
+        List<HitContent<Customer>> htis = response.getHits().getHits();
+        if ( CollectionUtils.isEmpty( htis ) )
+        {
+            return new ArrayList<>();
+
+        }
+
+        customers = new ArrayList<>( htis.size() );
+        for ( HitContent<Customer> hit : htis )
+        {
+            customers.add( hit.get_source() );
+        }
+
+        return customers;
     }
 
     /**

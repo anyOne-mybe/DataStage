@@ -10,6 +10,7 @@ import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
 import com.guan.datastage.api.customer.vo.EsMappingProperties;
 import com.guan.datastage.api.customer.vo.MappingResult;
+import com.guan.datastage.api.customer.vo.TransformationVO;
 import com.guan.datastage.commom.exception.BaseBusinessException;
 
 public interface ICustomerService
@@ -35,7 +36,7 @@ public interface ICustomerService
      */
     AddResponse addCustomer( Customer customer );
 
-    List<Map<String, Object>> transformationDatas(
+    List<TransformationVO<Map<String, Object>>> transformationDatas(
             List<Map<String, Object>> datas, String fileName )
             throws BaseBusinessException;
 

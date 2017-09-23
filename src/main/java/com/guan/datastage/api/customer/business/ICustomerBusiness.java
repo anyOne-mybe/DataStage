@@ -1,6 +1,8 @@
 
 package com.guan.datastage.api.customer.business;
 
+import java.util.List;
+
 import com.guan.datastage.api.customer.domain.Customer;
 import com.guan.datastage.api.customer.vo.AddResponse;
 import com.guan.datastage.api.customer.vo.AnalyzerResult;
@@ -15,7 +17,7 @@ public interface ICustomerBusiness
     CreateIndexResponse createCustomerFullNameIndex( Integer shards,
             Integer replicas );
 
-    void accurateSearchCustomerAliseName( String aliasName );
+    List<Customer> accurateSearchCustomerAliseName( String aliasName );
 
     MappingResult customerFullNameMapping(
             EsMappingProperties esMappingProperties );

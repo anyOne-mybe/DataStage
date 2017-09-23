@@ -19,6 +19,7 @@ import com.guan.datastage.api.customer.vo.AnalyzerResult;
 import com.guan.datastage.api.customer.vo.CreateIndexResponse;
 import com.guan.datastage.api.customer.vo.EsMappingProperties;
 import com.guan.datastage.api.customer.vo.MappingResult;
+import com.guan.datastage.api.customer.vo.TransformationVO;
 import com.guan.datastage.domain.common.ServiceResponse;
 
 @Path( "/customer" )
@@ -50,7 +51,7 @@ public interface ICustomerFacade
      */
     @POST
     @Path( "/transformation/{fileName}" )
-    ServiceResponse<List<Map<String, Object>>> transformationDatas(
+    ServiceResponse<List<TransformationVO<Map<String, Object>>>> transformationDatas(
             List<Map<String, Object>> datas,
             @PathParam( "fileName" ) String fileName );
 
