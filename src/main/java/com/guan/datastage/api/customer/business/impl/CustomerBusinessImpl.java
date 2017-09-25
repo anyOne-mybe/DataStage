@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -120,16 +121,18 @@ public class CustomerBusinessImpl implements ICustomerBusiness
 
         AnalyzerResult analyzerResult = analyze( value, analyzeToken );
         List<EsToken> tokens = analyzerResult.getTokens();
-        StringBuilder sb = new StringBuilder();
+        // StringBuilder sb = new StringBuilder();
+        StringJoiner tokenJoiner = new StringJoiner( StringUtils.SPACE );
         if ( !CollectionUtils.isEmpty( tokens ) )
         {
             for ( EsToken token : tokens )
             {
-                sb.append( token.getToken() ).append( StringUtils.SPACE );
+                tokenJoiner.add( token.getToken() );
+                // sb.append( token.getToken() ).append( StringUtils.SPACE );
             }
         }
 
-        return sb.toString();
+        return tokenJoiner.toString();
     }
 
     @Override
